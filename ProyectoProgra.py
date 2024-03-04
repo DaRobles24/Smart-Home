@@ -3,6 +3,8 @@
 import os
 import time
 
+newRoom=(" ")
+
 os.system (' CLS ')
 
 Welcome = "Smart Home"
@@ -46,8 +48,8 @@ while True:
         FrequentUSer = input("Ingrese su usuario: ")
         
         if FrequentUSer == NewUSer:
-            FrequentPassWord = (input("Ingrese su contraseña: "))
-            if FrequentPassWord == NewPassword:
+            FrequentPassWord = (input("Ingrese su contraseña o su pin: "))
+            if FrequentPassWord == NewPassword or FrequentPassWord == newPin:
                 os.system (' CLS ')
         
                 print (Welcome.center (150 ," "))
@@ -57,6 +59,49 @@ while True:
                 time.sleep(1.6)
                  
                 print (" ")
+                while True:
+                    
+                    #Apartado para agregar una habitacion
+                    
+                    os.system (' CLS ')
+        
+                    print (Welcome.center (150 ," "))
+
+                
+                    print ("¿Qué desea hacer?\n")
+                    option=input("1-Registrar una habitacion \n\n2-Ver habitaciones registradas\n\n3-Cerrar sesion\n\nIngrese la opción que desee: ")
+
+                    time.sleep(1.6)
+                    
+                    if option==("1"):
+                        newRoom=input("\nIngrese el nombre de la habitacion: ")
+                        print ("\nSe ha registrado la habitacion: ",newRoom)
+                        input ("Enter para ir al menu principal")
+                        
+                        time.sleep(1.6)
+
+                        
+                    elif option==("2"):
+
+                         if newRoom==(" "):
+                             print ("No hay habitaciones registradas")
+
+                             time.sleep(1.6)
+
+                         else:
+                             print("Estas son las habitaciones registaradas:")
+                             print(newRoom)
+                             input ("Enter para ir al menu principal")
+
+                             time.sleep(1.6)
+
+                    elif option==("3"):
+                        print("Saliendo")
+                        
+                        time.sleep(1.6)
+                        break
+                    else:
+                        print("Esa opcion no es valida")
             else:
                 print("Contraseña invalida, Intentelo de nuevo")
                 
@@ -75,7 +120,7 @@ while True:
         
         print (" ")
         
-        print ("Creación de Usuario y contraseña:")
+        print ("Creación de Usuario, contraseña y pin:")
         
         print (" ")
         
@@ -91,32 +136,51 @@ while True:
         
         print (" ")
         
-        NewPassword = input("Cree su Contraseña ")
-        
-        print (" ")
-        
-        Mayuscula = False
-        Num = False
+        while True:
+            NewPassword = input("Cree su Contraseña: ")
             
-        for mayus in NewPassword:
-            if mayus.isupper () == True:
-                 Mayuscula = True
-        if not Mayuscula:
-            print ("Error, debe de incluir al menos una mayuscula")
-            time.sleep(1.6)
-        
-        for carac in NewPassword:
-            if carac.isdigit ()  == True:
-                Num = True 
-        if not Num:
-            print ("La contraseña tiene que tener al menos un numero")
-            time.sleep(1.6)
+            print (" ")
             
-        if len(NewPassword) < 8:
-            print ("Contraseña muy corta", len(NewPassword),"de 8") 
-            time.sleep(1.6)  
-        else:
-            input("Creación Exitosa ENTER para volver al Menú")
+            Mayuscula = False
+            Num = False
+                
+            for mayus in NewPassword:
+                if mayus.isupper () == True:
+                     Mayuscula = True
+            if not Mayuscula:
+                print ("Error, debe de incluir al menos una mayuscula")
+                time.sleep(1.6)
+            
+            for carac in NewPassword:
+                if carac.isdigit ()  == True:
+                    Num = True 
+            if not Num:
+                print ("La contraseña tiene que tener al menos un numero")
+                time.sleep(1.6)
+                
+            if len(NewPassword) < 8:
+                print ("Contraseña muy corta", len(NewPassword),"de 8") 
+                time.sleep(1.6)  
+            else:
+                print("Contraseña regsitrada\n")
+                time.sleep(1.6)
+                break
+
+        while True:
+                
+            newPin = input("Cree un de PIN de 4 digitos: ")
+            
+            if len(newPin) < 4:
+                print ("\n Pin muy corto,", len(newPin)," digitos de 4") 
+                time.sleep(1.6)
+            else:
+                print("Pin regsitrado \n")
+                time.sleep(1.6)
+                break
+            
+        email=input("Ingrese su Correo Electronico: ")
+        input("\nSe ha registrado el usuarion con exito, ENTER para volver al menu principal")
+            
        
     
     # Ver usuarios existentes       
