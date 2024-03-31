@@ -4,12 +4,28 @@ import os
 import time
 
 newRoom=(" ")
+newLock=(" ")
+
 
 os.system (' CLS ')
 
 Welcome = "Smart Home"
 
 print (Welcome.center (150 ," "))
+
+
+def showInfo (info):
+
+     if info==(" "):
+         print ("\nNo hay nada registrado")
+         time.sleep(1.6)
+
+     else:
+         print("Estas son las que se encuentran registaradas:")
+         print(info)
+
+
+
 
 # Menu Principal
 while True:
@@ -69,7 +85,7 @@ while True:
 
                 
                     print ("¿Qué desea hacer?\n")
-                    option=input("1-Registrar una habitacion \n\n2-Ver habitaciones registradas\n\n3-Cerrar sesion\n\nIngrese la opción que desee: ")
+                    option=input("1-Registrar una habitacion \n\n2-Ver habitaciones registradas\n\n3-Registrar cerraduras \n\n4-Cerrar sesion\n\nIngrese la opción que desee: ")
 
                     time.sleep(1.6)
                     
@@ -83,19 +99,93 @@ while True:
                         
                     elif option==("2"):
 
-                         if newRoom==(" "):
-                             print ("No hay habitaciones registradas")
+                        showInfo(newRoom)
+                        input ("Enter para ir al menu principal")
 
-                             time.sleep(1.6)
+                        time.sleep(1.6)
 
-                         else:
-                             print("Estas son las habitaciones registaradas:")
-                             print(newRoom)
-                             input ("Enter para ir al menu principal")
+                    #Registrar una cerradura
 
-                             time.sleep(1.6)
-
+                        
                     elif option==("3"):
+                        while True:
+                            os.system (' CLS ')
+                            print ("\n\n¿Qué desea hacer?\n")
+                            option=input("1-Registrar una cerradura \n\n2-Ver cerraduras registradas \n\n3-Cambiar estado de la cerradura \n\n4-Menu anterior\n\nIngrese la opción que desee: ")
+                            
+                            
+                            if option==("1"):
+                                while true:
+                                    newLock=input("\nIngrese el nombre de la cerradura: ")
+                                    status=input("\nIngrese el estado de la cerradura: \n\n1-Abierta\n2-Cerrada")
+                                    
+                                    if status =="1":
+                                        status="Abierta"
+                                        break
+                                    elif status =="2":
+                                        status="Cerrada"
+                                        break
+                                    else:
+                                        print ("Esa opcion no es valida")
+
+                                    while True:
+                            
+                                        lock=input("Ingrese el codigo de apertura de 4 digitos")
+                                        if len(lock) < 4:
+                                            print ("\n Pin muy corto,", len(lock)," digitos de 4") 
+                                            time.sleep(1.6)
+                                        else:
+                                            print("Pin regsitrado \n")
+                                            input ("Enter para ir al menu principal")
+                                            time.sleep(1.6)
+                                            break
+                                    
+                            elif option==("2"):
+
+                                 showInfo(newLock)
+                                 if newLock!=(" "):
+                                     print ("El estado de la cerradura es:",status)
+                                     
+                                 input ("Enter para ir al menu principal")
+
+                                 time.sleep(1.6)
+
+                            elif option==("3"):
+
+                                 showInfo(newLock)
+                                 print ("**El estado de la cerradura es:",status,"**")
+                                 actualLock=input("Ingrese el pin para cambiar la cerradura")
+                                 
+                                 if actualLock==lock:
+                                     status=input("\nIngrese el nuevo estado de la cerradura: \n\n1-Abierta\n2-Cerrada")
+                                     if status =="1":
+                                        status="Abierta"
+                                        break
+                                     elif status =="2":
+                                        status="Cerrada"
+                                        break
+                                     else:
+                                        print ("Esa opcion no es valida")
+                                        
+                                     input ("Enter para ir al menu principal")
+                                     time.sleep(1.6)
+                                 else:
+                                     print("Pin incorrecto")
+                                     input ("Enter para ir al menu principal")
+                                     time.sleep(1.6)
+                                 
+                            elif option==("4"):
+                                 print("Saliendo")
+                        
+                                 time.sleep(1.6)
+                                 break
+
+                            else:
+                                print("Esa opcion no es valida")                                
+                
+                
+                        
+                    elif option==("4"):
                         print("Saliendo")
                         
                         time.sleep(1.6)
