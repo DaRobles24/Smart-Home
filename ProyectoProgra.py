@@ -3,6 +3,9 @@
 import os
 import time
 
+luces = 0
+ventiladores = 0
+enchufes = 0
 newRoom=(" ")
 newLock=(" ")
 
@@ -24,8 +27,54 @@ def showInfo (info):
          print("Estas son las que se encuentran registaradas:")
          print(info)
 
+def showInfo(info):
+    if info == "":
+        print("\nNo hay nada registrado")
+        time.sleep(1.6)
+    else:
+        print("Estas son las que se encuentran registaradas:")
+        print(info)
 
 
+def RegisterDevice():
+    global luces, ventiladores, enchufes
+    
+    print(" ")
+    print("Tipos de Dispositivos: ")
+    print("\n 1-Luces \n 2-Ventiladores \n 3-Enchufes\n")
+    
+    TypeDevice = int(input("Ingrese el tipo de Dispositivo que desea ingresar: "))
+    
+    if TypeDevice == 1:
+        luces += 1 
+        print("\n Luces Registradas")
+        time.sleep(1.6)
+        
+    elif TypeDevice == 2:
+        ventiladores += 1
+        print("\n Ventiladores Registrados")
+        time.sleep(1.6)
+        
+    elif TypeDevice == 3:
+        enchufes += 1 
+        print("\n Enchufe Registrado")
+        time.sleep(1.6)
+
+
+def viewDevice():
+    global luces, ventiladores, enchufes
+    
+    if ventiladores > 0:
+        print("Ventiladores registrados: ", ventiladores)
+        time.sleep(1.6)
+    elif luces > 0:
+        print("Luces registradas: ", luces)
+        time.sleep(1.6)
+    elif enchufes > 0:
+        print("Enchufes registrados: ", enchufes)
+        time.sleep(1.6)
+       
+       
 
 # Menu Principal
 while True:
@@ -85,7 +134,7 @@ while True:
 
                 
                     print ("¿Qué desea hacer?\n")
-                    option=input("1-Registrar una habitacion \n\n2-Ver habitaciones registradas\n\n3-Registrar cerraduras \n\n4-Cerrar sesion\n\nIngrese la opción que desee: ")
+                    option=input("1-Registrar una habitacion \n\n2-Ver habitaciones registradas\n\n3-Registrar cerraduras \n\n4-Registrar Dispositivo\n\n5-Ver Dispositivo\n\n6- Actualizar Pin\n\n7-Cerrar sesion\n\nIngrese la opción que desee: ")
 
                     time.sleep(1.6)
                     
@@ -115,7 +164,7 @@ while True:
                             
                             
                             if option==("1"):
-                                while true:
+                                while True:
                                     newLock=input("\nIngrese el nombre de la cerradura: ")
                                     status=input("\nIngrese el estado de la cerradura: \n\n1-Abierta\n2-Cerrada")
                                     
@@ -174,18 +223,43 @@ while True:
                                      input ("Enter para ir al menu principal")
                                      time.sleep(1.6)
                                  
-                            elif option==("4"):
+                            elif option==("7"):
                                  print("Saliendo")
                         
                                  time.sleep(1.6)
                                  break
 
                             else:
-                                print("Esa opcion no es valida")                                
+                                print("Esa opcion no es valida")   
+                    
                 
-                
+                    elif option == ("4"):
+                        RegisterDevice ()
                         
-                    elif option==("4"):
+                    elif option == ("5"):
+                        viewDevice ()
+                        
+                    elif option == ("6"):
+                        currentpin = input ("Ingrese su pin actual: \n")
+                        if currentpin == newPin:
+        
+                            currentpin = newPin
+        
+                            while True:
+                                newPin = input("Ingrese su nuevo pin: ")
+            
+                                if len(newPin) < 4:
+                                    print ("\n Pin muy corto,", len(newPin)," digitos de 4") 
+                                    time.sleep(1.6)
+                                else:
+                                    print("Pin regsitrado \n")
+                                    time.sleep(1.6) 
+                                    break
+                        else:
+                            print ("Contraseña equivocada ")
+                            time.sleep(1.6)
+                        
+                    elif option==("7"):
                         print("Saliendo")
                         
                         time.sleep(1.6)
