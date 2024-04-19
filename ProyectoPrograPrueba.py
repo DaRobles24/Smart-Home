@@ -195,16 +195,17 @@ while True:
         
         print (" ")
        
-        FrequentUSer = input("Ingrese su usuario: ")
+        user = input("Ingrese su usuario: ")
         
-        if FrequentUSer == NewUSer:
+        if user in users:
+            correct_password = users[user]
             FrequentPassWord = (input("Ingrese su contraseña o su pin: "))
-            if FrequentPassWord == NewPassword or FrequentPassWord == newPin:
+            if FrequentPassWord == correct_password:
                 os.system (' CLS ')
         
                 print (Welcome.center (150 ," "))
                 
-                print("Bienvenido,", FrequentUSer)
+                print("Bienvenido,", user)
                 
                 time.sleep(1.6)
                  
@@ -371,116 +372,89 @@ while True:
     # Apartado Registrar Usuario
     if rp == 2:
         
-        os.system (' CLS ')
-        
-        print (Welcome.center (150 ," "))
-        
-        print (" ")
-        
-        print ("Creación de Usuario, contraseña ó pin:")
-        
-        print (" ")
-        
-        print ("** IMPORTANTE SU CONTRASEÑÁ DEBE DE INCLUIR LO SIGUIENTE: **")
-        
-        print (" ")
-        
-        print (" -Una letra en Mayuscula\n","-Número\n","-Minimo 8 Caracteres")
-        
-        print (" ")
-        
-        print ("** IMPORTANTE SU PIN DEBE DE INCLUIR LO SIGUIENTE: **")
-        
-        print (" ")
-        
-        print ("-4 Digitos minimo")
-        
-        print (" ")
-        
-        NewUSer = input("Cree su Usuario: ")
-        
-        print (" ")
-        
-        choose = int(input("[1] Para crear PIN  [2] Para crear Contraseña"))
-        
-        if choose == 1:
-            os.system (' CLS ')
-            
+        os.system('cls')
+        print(Welcome.center(150, " "))
+        print("\nCreación de Usuario, contraseña ó pin:")
+        print("\n** IMPORTANTE SU CONTRASEÑÁ DEBE DE INCLUIR LO SIGUIENTE: **")
+        print("\n -Una letra en Mayuscula\n", "-Número\n", "-Minimo 8 Caracteres")
+        print("\n** IMPORTANTE SU PIN DEBE DE INCLUIR LO SIGUIENTE: **")
+        print("\n-4 Digitos minimo")
+
+        new_user = input("\nCree su Usuario: ")
+        if new_user in users:
+            print("\nEl usuario ya existe. Por favor, elija otro nombre de usuario.")
+            input("\nPresione ENTER para continuar...")
+            continue
+
+        password_choice = int(input("\n[1] Para crear PIN  [2] Para crear Contraseña: "))
+        if password_choice == 1:
             while True:
-                
-                newPin = input("Cree un de PIN: ")
-                        
-                if len(newPin) < 4:
-                    print ("\n Pin muy corto,", len(newPin)," digitos de 4") 
+                new_pin = input("\nCree un PIN: ")
+                if len(new_pin) < 4:
+                    print("\nPin muy corto. Debe tener al menos 4 dígitos.")
                     time.sleep(1.6)
                 else:
-                    print("Pin regsitrado \n")
+                    print("\nPIN registrado.")
+                    users[new_user] = new_pin
                     time.sleep(1.6)
                     break
-        elif choose == 2:
-        
+        elif password_choice == 2:
             while True:
-                
-                NewPassword = input("Cree su Contraseña: ")
-                
-                print (" ")
-                
-                failPassword = 0
-                Mayuscula = False
-                Num = False
-                    
-                for mayus in NewPassword:
-                    if mayus.isupper () == True:
-                        Mayuscula = True
-                if not Mayuscula:
-                    print ("Error, debe de incluir al menos una mayuscula")
-                    time.sleep(1.6)
-                    failPassword += 1
-                
-                for carac in NewPassword:
-                    if carac.isdigit ()  == True:
-                        Num = True 
-                if not Num:
-                    print ("La contraseña tiene que tener al menos un numero")
-                    time.sleep(1.6)
-                    failPassword += 1
-                    
-                if len(NewPassword) < 8:
-                    print ("Contraseña muy corta", len(NewPassword),"de 8") 
-                    time.sleep(1.6)
-                    failPassword += 1
-                     
-                if failPassword == 0:
-                    print("Contraseña regsitrada\n")
+                new_password = input("\nCree su Contraseña: ")
+                if any(char.isupper() for char in new_password) and any(char.isdigit() for char in new_password) and len(new_password) >= 8:
+                    print("\nContraseña registrada.")
+                    users[new_user] = new_password
                     time.sleep(1.6)
                     break
-            
-            
-        email=input("Ingrese su Correo Electronico: ")
-        input("\nSe ha registrado el usuarion con exito, ENTER para volver al menu principal")
+                else:
+                    print("\nError, la contraseña debe incluir al menos una mayúscula, un número y tener una longitud mínima de 8 caracteres.")
+                    time.sleep(1.6)
+        else:
+            print("\nOpción no válida.")
+            time.sleep(1.6)
+
+        email = input("\nIngrese su Correo Electronico: ")
+        input("\nSe ha registrado el usuario con éxito. Presione ENTER para volver al menú principal...")
+    elif rp == 3:
+        os.system('cls')
+        print(Welcome.center(150, " "))
+        print("\nCantidad de Usuarios: ")
+        print("\nUsuarios Registrados:")
+        if not users:
+            print("\nNo hay usuarios registrados")
+        else:
+            for user in users:
+                print(user)
+        input("\nPresione ENTER para volver al menú principal...")
+    elif rp == 4:
+        print("\nVuelve pronto :)")
+        time.sleep(1.6)
+        break
+    else:
+        print("\nOpción no válida. Por favor, ingrese una opción válida.")
+        time.sleep(1.6)
             
        
     
     # Ver usuarios existentes       
     if rp == 3:
-        os.system (' CLS ')
-        
-        print (Welcome.center (150 ," "))
-    
-        print (" ")
-        
-        print ("Cantidad de Usuarios: ")
-    
-        print (" ")
-        
-        if not NewUSer:
-            print ("No hay usuarios registrados")
+        os.system('cls')
+        print(Welcome.center(150, " "))
+        print("\nCantidad de Usuarios: ")
+        print("\nUsuarios Registrados:")
+        if not users:
+            print("\nNo hay usuarios registrados")
         else:
-            print (NewUSer)
-            
-            print (" ")
-        
-            input ("Enter para ir al menu principal")
+            for user in users:
+                print(user)
+        input("\nPresione ENTER para volver al menú principal...")
+    elif rp == 4:
+        print("\nVuelve pronto :)")
+        time.sleep(1.6)
+        break
+    else:
+        print("\nOpción no válida. Por favor, ingrese una opción válida.")
+        time.sleep(1.6)
         
         
     # Salir del programa
