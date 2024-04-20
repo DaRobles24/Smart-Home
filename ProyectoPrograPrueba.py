@@ -4,6 +4,7 @@ import os
 import time
 
 users = {}
+houses = []
 NewPassword = " "
 luces = 0
 ventiladores = 0
@@ -409,9 +410,7 @@ while True:
                 else:
                     print("\nError, la contraseña debe incluir al menos una mayúscula, un número y tener una longitud mínima de 8 caracteres.")
                     time.sleep(1.6)
-        else:
-            print("\nOpción no válida.")
-            time.sleep(1.6)
+
 
         email = input("\nIngrese su Correo Electronico: ")
         input("\nSe ha registrado el usuario con éxito. Presione ENTER para volver al menú principal...")
@@ -430,10 +429,7 @@ while True:
         print("\nVuelve pronto :)")
         time.sleep(1.6)
         break
-    else:
-        print("\nOpción no válida. Por favor, ingrese una opción válida.")
-        time.sleep(1.6)
-            
+
        
     
     # Ver usuarios existentes       
@@ -452,9 +448,7 @@ while True:
         print("\nVuelve pronto :)")
         time.sleep(1.6)
         break
-    else:
-        print("\nOpción no válida. Por favor, ingrese una opción válida.")
-        time.sleep(1.6)
+
         
         
     # Salir del programa
